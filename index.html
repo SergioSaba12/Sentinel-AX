@@ -234,11 +234,15 @@
     }
     .model-card:hover { box-shadow: 0 6px 28px 0 #2596f344; transform: translateY(-2px) scale(1.022);}
     .model-title {
-      font-size: 1.12rem;
-      font-weight: 800;
-      color: var(--samsung-blue);
-      margin-bottom: 0.3em;
-    }
+  font-size: 1.12rem;
+  font-weight: 800;
+  color: var(--samsung-blue-light) !important; /* Color azul Samsung claro */
+  margin-bottom: 0.3em;
+  text-shadow: 0 1px 10px #2596f340, 0 0px 2px #0004;
+  letter-spacing: -0.01em;
+  /* Opcional: efecto de degradado si lo quieres más vistoso */
+  background: linear-gradient(90deg, #2de0ff 20%, #2596f3 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; */
+}
     .model-desc {
       color: var(--text-soft);
       font-size: 1rem;
