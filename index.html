@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sentinel AX - Ciberseguridad Multiplataforma</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Paleta Samsung - Azules y gradientes inspirados */
+      --samsung-blue: #1428a0;
+      --samsung-blue-light: #2596f3;
+      --samsung-purple: #5328a0;
+      --samsung-gradient: radial-gradient(ellipse at 40% 60%, #2596f3 0%, #1428a0 50%, #000 100%);
+      --bg-dark: #090a0f;
+      --text-main: #fff;
+      --text-soft: #b0c4de;
+      --card-bg: rgba(20, 40, 160, 0.15);
+    }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100%;
+      width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      background: var(--bg-dark);
+    }
+    .hero-bg {
+      position: fixed;
+      z-index: -2;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: var(--samsung-gradient);
+      filter: blur(8px) brightness(0.85);
+      pointer-events: none;
+    }
+    header {
+      width: 100%;
+      padding: 2.5rem 0 1.2rem 0;
+      background: transparent;
+      font-size: 1.35rem;
+      font-weight: 500;
+      text-align: left;
+      margin-left: 2rem;
+    }
+    nav {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 2.2rem;
+      font-size: 1rem;
+      position: absolute;
+      top: 1.5rem; right: 2.5rem;
+      z-index: 2;
+    }
+    nav a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color .2s;
+    }
+    nav a:hover {
+      color: var(--samsung-blue-light);
+    }
+    .main-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 1rem 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 85vh;
+    }
+    .logo-sentinel {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 1.2rem;
+      border-radius: 1.8rem;
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 6px 36px 0 #1428a048;
+    }
+    h1 {
+      font-size: 2.7rem;
+      font-weight: 900;
+      margin: 0 0 1.1rem 0;
+      color: var(--samsung-blue-light);
+    }
+    h2 {
+      font-size: 2rem;
+      color: var(--samsung-blue);
+      margin: 2rem 0 1.2rem 0;
+      font-weight: 800;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 1.2rem;
+      padding: 1.7rem 1.7rem 1.1rem 1.7rem;
+      margin: 1.2rem 0;
+      box-shadow: 0 2px 16px 0 #0004;
+      backdrop-filter: blur(2px);
+      width: 100%;
+      max-width: 750px;
+      transition: box-shadow .2s;
+    }
+    .card:hover {
+      box-shadow: 0 6px 32px 0 #2596f3a1;
+    }
+    .models {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+      width: 100%;
+    }
+    .model-card {
+      background: rgba(37,150,243,0.09);
+      border-radius: 1.1rem;
+      padding: 1.2rem 1rem 1rem 1rem;
+      min-height: 220px;
+      box-shadow: 0 1px 10px #1428a026;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 0.3rem;
+    }
+    .model-title {
+      font-size: 1.16rem;
+      font-weight: 800;
+      color: var(--samsung-blue);
+      margin-bottom: 0.45rem;
+    }
+    .model-desc {
+      color: var(--text-soft);
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+    .result-img {
+      max-width: 99%;
+      margin: 1.5rem 0 0.7rem 0;
+      border-radius: 0.6rem;
+      box-shadow: 0 0 12px #2596f344;
+      background: #222b;
+    }
+    .team, .contact {
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    footer {
+      text-align: center;
+      color: #b0c4de;
+      font-size: 0.97rem;
+      padding: 1.2rem 0 0.7rem 0;
+      letter-spacing: 0.05em;
+      margin-top: 2rem;
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      .main-section {
+        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+      }
+      h1 { font-size: 2.1rem; }
+      h2 { font-size: 1.22rem; }
+      .card { padding: 1.1rem 0.7rem 0.9rem 0.7rem; }
+      .models { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-bg"></div>
+  <header>
+    Samsung Innovation<br>Campus
+    <nav>
+      <a href="#intro">Inicio</a>
+      <a href="#arquitectura">Arquitectura</a>
+      <a href="#modelos">IA</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+  <main class="main-section">
+    <img src="cerebro2.jpg" alt="Logo Sentinel AX" class="logo-sentinel" />
+    <h1 id="intro">Sentinel AX</h1>
+    <div class="card">
+      <h2>Introducción</h2>
+      <p>
+        La ciberseguridad es uno de los mayores retos de la era digital. Sentinel AX surge como una solución integral y multiplataforma, capaz de proteger al usuario frente a <b>SPAM, phishing, enlaces maliciosos, imágenes fake</b> y amenazas de voz IA, combinando Inteligencia Artificial avanzada y arquitectura escalable.
+      </p>
+    </div>
+
+    <div class="card" id="arquitectura">
+      <h2>Arquitectura e Infraestructura</h2>
+      <p>
+        <b>Arquitectura robusta:</b> Proxy inverso, Frontend en Angular, Backend en Spring Boot (Java), microservicios FastAPI (Python IA) y base de datos distribuida Cassandra.<br>
+        <small>Todo encapsulado para máxima seguridad, escalabilidad y rendimiento.</small>
+      </p>
+    </div>
+
+    <h2 id="modelos">Modelos de Inteligencia Artificial</h2>
+    <div class="models">
+      <div class="model-card">
+        <div class="model-title">1. Detección de URLs Maliciosas</div>
+        <div class="model-desc">Analiza enlaces sospechosos usando IA para prevenir fraudes y phishing. Clasifica URLs en tiempo real con alta precisión.</div>
+      </div>
+      <div class="model-card">
+        <div class="model-title">2. Análisis de Correo SPAM</div>
+        <div class="model-desc">Modelo híbrido: reglas + XGBoost. Vectoriza textos, detecta patrones y filtra mensajes peligrosos usando aprendizaje automático.</div>
+      </div>
+      <div class="model-card">
+        <div class="model-title">3. Chatbot Inteligente</div>
+        <div class="model-desc">Responde dudas, asesora y educa en ciberseguridad usando procesamiento de lenguaje natural.</div>
+      </div>
+      <div class="model-card">
+        <div class="model-title">4. Detector de Imágenes Fake</div>
+        <div class="model-desc">CNN profunda entrenada con miles de imágenes reales y manipuladas. Clasifica imágenes como reales o falsas con una probabilidad.</div>
+      </div>
+      <div class="model-card">
+        <div class="model-title">5. Modelo de Voz: Idioma & Fake</div>
+        <div class="model-desc">Red neuronal multitarea que analiza audios para identificar el idioma (español, inglés, IA) y si la voz es real o deepfake.</div>
+      </div>
+    </div>
+
+
+    <div class="team card" id="equipo">
+      <h2>Equipo</h2>
+      <ul>
+        <li><a href="https://www.linkedin.com/in/sergio-sabater-ruiz-562753268/" target="_blank" style="color:var(--samsung-blue-light);text-decoration:none;">Sergio Sabater Ruiz</a></li>
+        <li><a href="https://www.linkedin.com/in/andrew-javier-%C3%B1aupari-erazo-660199168/" target="_blank" style="color:var(--samsung-blue-light);text-decoration:none;">Andrew Ñaupari Erazo</a></li> 
+        <!-- Puedes añadir aquí miembros concretos -->
+      </ul>
+    </div>
+    <div class="contact card" id="contacto">
+      <h2>Contacto</h2>
+      <p>Email: <a href="mailto:samsunginnovationcampusupv@gmail.com" style="color:var(--samsung-blue-light)">samsunginnovationcampusupv@gmail.com</a></p>
+    </div>
+  </main>
+  <div style="width:100%;margin:2.5rem 0 0.7rem 0;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:center;">
+  <!-- TensorFlow -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" title="TensorFlow" style="height:40px;width:auto;filter:drop-shadow(0 0 2px #2596f3);background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Keras -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg" alt="Keras" title="Keras" style="height:40px;width:auto;filter:drop-shadow(0 0 2px #5328a0);background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Cassandra -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" alt="Cassandra" title="Cassandra" style="height:40px;width:auto;filter:drop-shadow(0 0 2px #2596f3);background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Python -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+  <!-- FastAPI -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" title="FastAPI" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Angular -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular" title="Angular" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Spring Boot -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" title="Spring Boot" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+  <!-- XGBoost (sin logo oficial, usa un icono de ML) -->
+  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-Learn" title="Scikit-Learn" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Scikit-learn -->
+  <img src="https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-11/xgboost-logo-rwd.png" alt="XGBoost" title="XGBoost" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Nginx (proxy inverso) -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" title="Proxy inverso" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+  <!-- Docker -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" title="Docker" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
+</div>
+
+  <footer>
+    &copy; 2025 Sentinel AX &middot; Samsung Innovation Campus
+  </footer>
+</body>
+</html>
