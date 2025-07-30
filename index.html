@@ -99,6 +99,84 @@
       color: var(--samsung-blue-light);
       text-shadow: 0 2px 22px #2596f366;
     }
+    .nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 0.45em 0.65em;
+  margin-left: 1em;
+  z-index: 120;
+}
+.nav-toggle span {
+  display: block;
+  width: 28px;
+  height: 3.5px;
+  background: var(--white);
+  border-radius: 3px;
+  transition: all .22s cubic-bezier(.4,2,.6,1);
+}
+.menu-bar {
+  position: fixed;
+  width: 100vw;
+  top: 0; left: 0;
+  z-index: 100;
+}
+
+/* Responsive navbar */
+@media (max-width: 850px) {
+  nav#navbar {
+    position: fixed;
+    top: 56px; right: 0;
+    background: rgba(20,35,58,0.97);
+    flex-direction: column;
+    align-items: flex-end;
+    width: 64vw;
+    max-width: 290px;
+    height: 100vh;
+    box-shadow: -3px 0 30px #1428a048;
+    border-left: 1.5px solid #23337b25;
+    padding: 1.5em 2.1em 1.8em 1.1em;
+    gap: 1.1em;
+    transform: translateX(105%);
+    transition: transform .23s cubic-bezier(.77,.17,.36,1.18);
+    font-size: 1.13rem;
+    text-align: right;
+    opacity: 0.98;
+  }
+  nav#navbar.open {
+    transform: translateX(0%);
+  }
+  .nav-toggle {
+    display: flex;
+  }
+}
+
+/* Hamburguesa animada */
+.nav-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Cuando el menú está abierto, fondo oscuro detrás (opcional) */
+#navbar.open::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(14,19,34,0.45);
+  z-index: -1;
+}
+
     .hero-desc {
       font-size: 1.23rem;
       color: var(--text-soft);
@@ -226,11 +304,20 @@
   <div class="menu-bar">
     <span class="menu-logo">Samsung Innovation Campus</span>
     <nav>
-      <a href="#inicio">Inicio</a>
-      <a href="#arquitectura">Arquitectura</a>
-      <a href="#modelos">IA</a>
-      <a href="#equipo">Equipo</a>
-      <a href="#contacto">Contacto</a>
+      <div class="menu-bar">
+  <span class="menu-logo">Samsung Innovation Campus</span>
+  <nav id="navbar">
+    <a href="#inicio">Inicio</a>
+    <a href="#arquitectura">Arquitectura</a>
+    <a href="#modelos">IA</a>
+    <a href="#equipo">Equipo</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
     </nav>
   </div>
   <main>
@@ -249,38 +336,99 @@
         <b>Arquitectura robusta:</b> Proxy inverso, Frontend en Angular, Backend en Spring Boot (Java), microservicios FastAPI (Python IA) y base de datos distribuida Cassandra.<br>
         <small>Todo encapsulado para máxima seguridad, escalabilidad y rendimiento.</small>
       </div>
-      <div class="svg-arch-wrap">
-        <!-- SVG DIAGRAMA BONITO -->
-        <svg width="860" height="250" viewBox="0 0 880 250" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="880" height="250" rx="38" fill="url(#bg-gradient)" />
-          <defs>
-            <linearGradient id="bg-gradient" x1="0" y1="0" x2="880" y2="250" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#0d193d"/>
-              <stop offset="1" stop-color="#222950"/>
-            </linearGradient>
-          </defs>
-          <rect x="40" y="105" width="110" height="52" rx="20" fill="#2596f3" stroke="#1428a0" stroke-width="3"/>
-          <text x="95" y="137" font-size="18" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Proxy Inverso</text>
-          <polygon points="150,131 200,131 200,121 225,141 200,161 200,151 150,151" fill="#fff" opacity="0.88"/>
-          <rect x="230" y="90" width="135" height="48" rx="20" fill="#5328a0" stroke="#2596f3" stroke-width="3"/>
-          <text x="297" y="120" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Frontend</text>
-          <text x="297" y="140" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">Angular</text>
-          <polygon points="365,115 410,115 410,105 435,125 410,145 410,135 365,135" fill="#fff" opacity="0.88"/>
-          <rect x="440" y="75" width="135" height="48" rx="20" fill="#2596f3" stroke="#5328a0" stroke-width="3"/>
-          <text x="507" y="105" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Backend</text>
-          <text x="507" y="125" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">Spring Boot</text>
-          <polygon points="575,98 620,98 620,88 645,108 620,128 620,118 575,118" fill="#fff" opacity="0.88"/>
-          <rect x="655" y="45" width="130" height="44" rx="20" fill="#11c3b0" stroke="#1428a0" stroke-width="3"/>
-          <text x="720" y="75" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">FastAPI</text>
-          <text x="720" y="95" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">Python + IA</text>
-          <!-- Cassandra vertical below -->
-          <rect x="440" y="160" width="135" height="48" rx="20" fill="#23265c" stroke="#2596f3" stroke-width="3"/>
-          <text x="507" y="191" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Cassandra</text>
-          <text x="507" y="209" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">NoSQL DB</text>
-          <!-- Línea bajando a Cassandra -->
-          <rect x="505" y="125" width="5" height="35" rx="2" fill="#2596f3"/>
-        </svg>
-      </div>
+   <div class="svg-arch-wrap">
+  <svg width="950" height="270" viewBox="0 0 950 270" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bg-gradient" x1="0" y1="0" x2="950" y2="270" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#0d193d"/>
+        <stop offset="1" stop-color="#222950"/>
+      </linearGradient>
+      <linearGradient id="grad-proxy" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#34d0ff"/>
+        <stop offset="100%" stop-color="#2596f3"/>
+      </linearGradient>
+      <linearGradient id="grad-frontend" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#b67aff"/>
+        <stop offset="100%" stop-color="#5328a0"/>
+      </linearGradient>
+      <linearGradient id="grad-backend" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#8edfff"/>
+        <stop offset="100%" stop-color="#2596f3"/>
+      </linearGradient>
+      <linearGradient id="grad-fastapi" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#17fff2"/>
+        <stop offset="100%" stop-color="#11c3b0"/>
+      </linearGradient>
+      <linearGradient id="grad-cassandra" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#4953da"/>
+        <stop offset="100%" stop-color="#23265c"/>
+      </linearGradient>
+      <linearGradient id="arrow" x1="0" y1="0" x2="1" y2="0">
+        <stop stop-color="#fff" stop-opacity="0.95"/>
+        <stop offset="1" stop-color="#2596f3" stop-opacity="0.95"/>
+      </linearGradient>
+      <linearGradient id="arrow-green" x1="0" y1="0" x2="1" y2="0">
+        <stop stop-color="#fff" stop-opacity="0.95"/>
+        <stop offset="1" stop-color="#11c3b0" stop-opacity="0.95"/>
+      </linearGradient>
+      <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#011a25" flood-opacity="0.55"/>
+      </filter>
+    </defs>
+    <rect x="0" y="0" width="950" height="270" rx="38" fill="url(#bg-gradient)" />
+
+    <!-- Proxy inverso -->
+    <rect x="40" y="110" width="110" height="52" rx="20" fill="url(#grad-proxy)" stroke="#34d0ff" stroke-width="3" />
+    <text x="95" y="143" font-size="18" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial" filter="url(#shadow)">Proxy Inverse</text>
+    <!-- Flecha Proxy -> Frontend -->
+    <polygon points="150,136 200,136 200,126 225,146 200,166 200,156 150,156" fill="url(#arrow)" opacity="0.93"/>
+    <!-- Frontend -->
+    <rect x="230" y="95" width="135" height="48" rx="20" fill="url(#grad-frontend)" stroke="#b67aff" stroke-width="3"/>
+    <text x="297" y="125" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial" filter="url(#shadow)">Frontend</text>
+    <text x="297" y="145" font-size="13" text-anchor="middle" fill="#e6dbfa" font-family="Inter,Arial" filter="url(#shadow)">Angular</text>
+    <!-- Texto NO logueado arriba -->
+    <text x="400" y="70" font-size="15" font-weight="bold" fill="#11c3b0" font-family="Inter,Arial" filter="url(#shadow)">NO logueado</text>
+    <!-- Flecha directa Frontend -> FastAPI (NO logueado) -->
+    <polygon points="362,115 425,77 437,93 375,132" fill="url(#arrow-green)" opacity="0.93"/>
+    <!-- Texto Logueado debajo de flecha -->
+    <text x="390" y="172" font-size="15" font-weight="bold" fill="#2596f3" font-family="Inter,Arial" filter="url(#shadow)">Logueado</text>
+    <!-- Flecha Frontend -> Backend (logueado) -->
+    <polygon points="362,135 410,135 410,125 435,145 410,165 410,155 362,155" fill="url(#arrow)" opacity="0.93"/>
+    <!-- Backend -->
+    <rect x="440" y="80" width="135" height="48" rx="20" fill="url(#grad-backend)" stroke="#8edfff" stroke-width="3"/>
+    <text x="507" y="110" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial" filter="url(#shadow)">Backend</text>
+    <text x="507" y="130" font-size="13" text-anchor="middle" fill="#d7efff" font-family="Inter,Arial" filter="url(#shadow)">Spring Boot</text>
+    <!-- Texto API REST -->
+    <text x="630" y="63" font-size="15" font-weight="bold" fill="#11c3b0" font-family="Inter,Arial" filter="url(#shadow)">API REST</text>
+    <!-- Flecha Backend -> FastAPI -->
+    <polygon points="575,102 720,72 732,88 600,117" fill="url(#arrow-green)" opacity="0.93"/>
+    <!-- FastAPI -->
+    <rect x="740" y="45" width="150" height="44" rx="20" fill="url(#grad-fastapi)" stroke="#1dfaf0" stroke-width="3"/>
+    <text x="815" y="75" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial" filter="url(#shadow)">FastAPI</text>
+    <text x="815" y="95" font-size="13" text-anchor="middle" fill="#cbfffa" font-family="Inter,Arial" filter="url(#shadow)">Python + IA</text>
+    <!-- Backend -> Cassandra vertical -->
+    <rect x="505" y="128" width="5" height="35" rx="2" fill="#2596f3"/>
+    <!-- Texto Logueado vertical -->
+    <text x="535" y="163" font-size="15" font-weight="bold" fill="#2596f3" font-family="Inter,Arial" filter="url(#shadow)">Logueado</text>
+    <!-- Cassandra -->
+    <rect x="440" y="170" width="135" height="48" rx="20" fill="url(#grad-cassandra)" stroke="#8edfff" stroke-width="3"/>
+    <text x="507" y="200" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial" filter="url(#shadow)">Cassandra</text>
+    <text x="507" y="220" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial" filter="url(#shadow)">NoSQL DB</text>
+    <!-- Texto Respuesta vertical -->
+    <text x="555" y="220" font-size="15" font-weight="bold" fill="#2596f3" font-family="Inter,Arial" filter="url(#shadow)">Respuesta</text>
+    <!-- Texto Resultado IA (ahora más adentro) -->
+    <text x="920" y="120" font-size="15" font-weight="bold" fill="#2596f3" font-family="Inter,Arial" filter="url(#shadow)">Resultado IA</text>
+    <!-- Flecha de FastAPI (respuesta) -> Backend (ahora más corta) -->
+    <polygon points="890,77 930,95 920,110 865,90" fill="url(#arrow-green)" opacity="0.82"/>
+    <!-- Texto Resp. directa centrado debajo de FastAPI -->
+    <text x="815" y="160" font-size="15" font-weight="bold" fill="#11c3b0" font-family="Inter,Arial" filter="url(#shadow)">Resp. directa</text>
+    <!-- Flecha directa de FastAPI -> Frontend (respuesta NO logueado) más corta -->
+    <polygon points="815,90 815,140 825,140 805,160 785,140 795,140 795,90" fill="url(#arrow-green)" opacity="0.8"/>
+  </svg>
+</div>
+
+
+
     </div>
 
     <div class="glass-card" id="modelos">
@@ -338,5 +486,21 @@
   <footer>
     &copy; 2025 Sentinel AX &middot; Samsung Innovation Campus
   </footer>
+  <script>
+  const navToggle = document.getElementById('navToggle');
+  const navbar = document.getElementById('navbar');
+  navToggle.onclick = function() {
+    navToggle.classList.toggle('active');
+    navbar.classList.toggle('open');
+  };
+  // Opcional: cerrar menú al hacer click en enlace
+  document.querySelectorAll('#navbar a').forEach(link =>
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navbar.classList.remove('open');
+    })
+  );
+</script>
+
 </body>
 </html>
