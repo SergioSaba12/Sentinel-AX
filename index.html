@@ -4,231 +4,325 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sentinel AX - Ciberseguridad Multiplataforma</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Paleta Samsung - Azules y gradientes inspirados */
       --samsung-blue: #1428a0;
       --samsung-blue-light: #2596f3;
-      --samsung-purple: #5328a0;
-      --samsung-gradient: radial-gradient(ellipse at 40% 60%, #2596f3 0%, #1428a0 50%, #000 100%);
-      --bg-dark: #090a0f;
-      --text-main: #fff;
+      --samsung-lila: #5328a0;
+      --samsung-cyan: #11c3b0;
+      --bg-dark: #0b101b;
+      --card-bg: rgba(18,28,53,0.62);
+      --card-blur: blur(12px);
+      --white: #fff;
       --text-soft: #b0c4de;
-      --card-bg: rgba(20, 40, 160, 0.15);
+      --shadow-main: 0 4px 24px 0 #10172644;
+      --glass: rgba(255,255,255,0.07);
     }
     html, body {
       margin: 0; padding: 0;
-      font-family: 'Roboto', Arial, sans-serif;
+      font-family: 'Inter', 'Roboto', Arial, sans-serif;
       background: var(--bg-dark);
-      color: var(--text-main);
-      min-height: 100%;
-      width: 100vw;
+      color: var(--white);
+      width: 100vw; min-height: 100vh;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
       overflow-x: hidden;
     }
     body {
-      background: var(--bg-dark);
+      background: radial-gradient(ellipse at 40% 60%, #2596f340 0%, #5328a032 60%, #1428a0 100%), var(--bg-dark);
+      min-height: 100vh;
     }
-    .hero-bg {
-      position: fixed;
-      z-index: -2;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: var(--samsung-gradient);
-      filter: blur(8px) brightness(0.85);
-      pointer-events: none;
-    }
-    header {
+    /* MENU */
+    .menu-bar {
       width: 100%;
-      padding: 2.5rem 0 1.2rem 0;
-      background: transparent;
-      font-size: 1.35rem;
-      font-weight: 500;
-      text-align: left;
-      margin-left: 2rem;
+      position: fixed;
+      top: 0; left: 0; z-index: 99;
+      background: rgba(15,22,40,0.80);
+      backdrop-filter: blur(12px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem 4vw 0.6rem 2vw;
+      box-shadow: 0 2px 24px #0e214c33;
+      border-bottom: 1px solid #18234255;
+    }
+    .menu-logo {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      padding: 0.35em 0.5em;
+      border-radius: 10px;
+      background: linear-gradient(120deg, #2596f370 40%, #5328a0 90%);
+      box-shadow: 0 2px 18px #2596f344;
+      margin-right: 1.2em;
     }
     nav {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 2.2rem;
-      font-size: 1rem;
-      position: absolute;
-      top: 1.5rem; right: 2.5rem;
-      z-index: 2;
+      display: flex; gap: 1.6em;
     }
     nav a {
       color: var(--text-soft);
+      font-weight: 600;
       text-decoration: none;
-      font-weight: 700;
-      transition: color .2s;
+      padding: 0.35em 1em;
+      border-radius: 8px;
+      transition: background .16s, color .16s;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
     }
     nav a:hover {
+      background: var(--glass);
       color: var(--samsung-blue-light);
     }
-    .main-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2.5rem 1rem 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      min-height: 85vh;
+    /* HERO */
+    .hero-section {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 70vh;
+      padding-top: 5.6em;
+      text-align: center;
     }
     .logo-sentinel {
-      width: 90px;
-      height: 90px;
+      width: 105px; height: 105px;
+      border-radius: 2em;
       object-fit: contain;
-      margin-bottom: 1.2rem;
-      border-radius: 1.8rem;
-      background: rgba(255,255,255,0.08);
-      box-shadow: 0 6px 36px 0 #1428a048;
+      margin-bottom: 1.2em;
+      box-shadow: 0 6px 36px 0 #2596f355;
+      background: #141d2e50;
+      transition: transform .18s;
     }
-    h1 {
-      font-size: 2.7rem;
+    .logo-sentinel:hover { transform: scale(1.08);}
+    .hero-title {
+      font-size: 3.0rem;
       font-weight: 900;
-      margin: 0 0 1.1rem 0;
+      margin: 0 0 0.5em 0;
+      letter-spacing: -0.02em;
       color: var(--samsung-blue-light);
+      text-shadow: 0 2px 22px #2596f366;
+    }
+    .hero-desc {
+      font-size: 1.23rem;
+      color: var(--text-soft);
+      font-weight: 400;
+      max-width: 600px;
+      margin: 0 auto 1.2em auto;
+      line-height: 1.7;
+    }
+    .glass-card {
+      background: var(--card-bg);
+      border-radius: 2em;
+      padding: 2.1em 2.2em 1.5em 2.2em;
+      margin: 2em auto;
+      box-shadow: var(--shadow-main);
+      max-width: 830px;
+      backdrop-filter: var(--card-blur);
+      border: 1.5px solid #23337b2a;
     }
     h2 {
       font-size: 2rem;
       color: var(--samsung-blue);
-      margin: 2rem 0 1.2rem 0;
+      margin: 0 0 0.8em 0;
       font-weight: 800;
+      letter-spacing: -0.01em;
+      text-shadow: 0 2px 12px #2596f326;
     }
-    .card {
-      background: var(--card-bg);
-      border-radius: 1.2rem;
-      padding: 1.7rem 1.7rem 1.1rem 1.7rem;
-      margin: 1.2rem 0;
-      box-shadow: 0 2px 16px 0 #0004;
-      backdrop-filter: blur(2px);
-      width: 100%;
-      max-width: 750px;
-      transition: box-shadow .2s;
+    /* Arquitectura SVG */
+    .svg-arch-wrap {
+      width: 100%; max-width: 890px;
+      margin: 2.2em auto 1.5em auto;
+      display: flex; justify-content: center; align-items: center;
     }
-    .card:hover {
-      box-shadow: 0 6px 32px 0 #2596f3a1;
-    }
+    /* Modelos grid */
     .models {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2rem;
-      margin-bottom: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2em;
+      margin-bottom: 2em;
       width: 100%;
     }
     .model-card {
       background: rgba(37,150,243,0.09);
-      border-radius: 1.1rem;
-      padding: 1.2rem 1rem 1rem 1rem;
-      min-height: 220px;
-      box-shadow: 0 1px 10px #1428a026;
+      border-radius: 1.6em;
+      padding: 1.2em 1em 1.2em 1em;
+      box-shadow: 0 2px 12px #1428a022;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      margin-bottom: 0.3rem;
+      min-height: 190px;
+      border: 1px solid #23337b15;
+      transition: box-shadow .18s, transform .15s;
     }
+    .model-card:hover { box-shadow: 0 6px 28px 0 #2596f344; transform: translateY(-2px) scale(1.022);}
     .model-title {
-      font-size: 1.16rem;
+      font-size: 1.12rem;
       font-weight: 800;
       color: var(--samsung-blue);
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.3em;
     }
     .model-desc {
       color: var(--text-soft);
       font-size: 1rem;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.7em;
       line-height: 1.5;
     }
+    /* Resultados & logos */
     .result-img {
-      max-width: 99%;
-      margin: 1.5rem 0 0.7rem 0;
-      border-radius: 0.6rem;
-      box-shadow: 0 0 12px #2596f344;
-      background: #222b;
+      max-width: 99%; margin: 1.5em 0 0.7em 0;
+      border-radius: 0.7em;
+      box-shadow: 0 0 18px #2596f366;
+      background: #191f2b99;
+      border: 1.2px solid #23337b22;
     }
+    .logos-tech {
+      width: 100%; margin: 2.8em 0 0.8em 0;
+      display: flex; flex-wrap: wrap; gap: 28px;
+      justify-content: center; align-items: center;
+      filter: drop-shadow(0 4px 20px #1328a045);
+    }
+    .logos-tech img {
+      height: 43px; width: auto;
+      background: #fff3;
+      padding: 6px 8px;
+      border-radius: 10px;
+      transition: box-shadow .16s;
+      box-shadow: 0 1px 10px #1428a016;
+    }
+    .logos-tech img:hover { box-shadow: 0 4px 18px #2596f388;}
+    /* Equipo/contacto */
     .team, .contact {
-      margin-top: 1.5rem;
-      margin-bottom: 2rem;
+      margin-top: 1.6em;
+      margin-bottom: 2em;
+      background: var(--card-bg);
+      border-radius: 1.5em;
+      padding: 1.3em 1.4em 1em 1.4em;
+      box-shadow: 0 2px 12px #2596f332;
+      border: 1px solid #23337b10;
     }
+    .team ul { list-style: none; padding: 0; margin: 0;}
+    .team li {margin: 0.18em 0;}
+    .team a {color: var(--samsung-blue-light);text-decoration:none;font-weight:700;}
+    .team a:hover {text-decoration:underline;}
+    /* Footer */
     footer {
       text-align: center;
       color: #b0c4de;
-      font-size: 0.97rem;
-      padding: 1.2rem 0 0.7rem 0;
+      font-size: 1.04rem;
+      padding: 1.2em 0 0.9em 0;
       letter-spacing: 0.05em;
-      margin-top: 2rem;
+      margin-top: 2em;
+      border-top: 1.5px solid #18234222;
+      background: rgba(14,19,34,0.58);
+      backdrop-filter: blur(6px);
     }
     /* Responsive */
-    @media (max-width: 700px) {
-      .main-section {
-        padding: 1.2rem 0.5rem 1.2rem 0.5rem;
-      }
-      h1 { font-size: 2.1rem; }
-      h2 { font-size: 1.22rem; }
-      .card { padding: 1.1rem 0.7rem 0.9rem 0.7rem; }
-      .models { grid-template-columns: 1fr; }
+    @media (max-width: 760px) {
+      .hero-title { font-size: 2.15rem; }
+      .glass-card, .svg-arch-wrap { padding: 0.4em;}
+      .glass-card, .team, .contact {padding: 1em 0.6em 0.8em 0.6em;}
+      .svg-arch-wrap svg { width: 97vw !important;}
     }
   </style>
 </head>
 <body>
-  <div class="hero-bg"></div>
-  <header>
-    Samsung Innovation<br>Campus
+  <div class="menu-bar">
+    <span class="menu-logo">Samsung Innovation Campus</span>
     <nav>
-      <a href="#intro">Inicio</a>
+      <a href="#inicio">Inicio</a>
       <a href="#arquitectura">Arquitectura</a>
       <a href="#modelos">IA</a>
       <a href="#equipo">Equipo</a>
       <a href="#contacto">Contacto</a>
     </nav>
-  </header>
-  <main class="main-section">
-    <img src="cerebro2.jpg" alt="Logo Sentinel AX" class="logo-sentinel" />
-    <h1 id="intro">Sentinel AX</h1>
-    <div class="card">
-      <h2>Introducción</h2>
-      <p>
-        La ciberseguridad es uno de los mayores retos de la era digital. Sentinel AX surge como una solución integral y multiplataforma, capaz de proteger al usuario frente a <b>SPAM, phishing, enlaces maliciosos, imágenes fake</b> y amenazas de voz IA, combinando Inteligencia Artificial avanzada y arquitectura escalable.
-      </p>
-    </div>
+  </div>
+  <main>
+    <section class="hero-section" id="inicio">
+      <img src="cerebro2.jpg" alt="Logo Sentinel AX" class="logo-sentinel" />
+      <h1 class="hero-title">Sentinel AX</h1>
+      <div class="hero-desc">
+        La ciberseguridad es uno de los mayores retos de la era digital.<br>
+        Sentinel AX es una solución integral y multiplataforma, capaz de proteger frente a <b>SPAM, phishing, enlaces maliciosos, imágenes fake</b> y amenazas de voz IA, combinando Inteligencia Artificial avanzada y arquitectura escalable.
+      </div>
+    </section>
 
-    <div class="card" id="arquitectura">
+    <div class="glass-card" id="arquitectura">
       <h2>Arquitectura e Infraestructura</h2>
-      <p>
+      <div>
         <b>Arquitectura robusta:</b> Proxy inverso, Frontend en Angular, Backend en Spring Boot (Java), microservicios FastAPI (Python IA) y base de datos distribuida Cassandra.<br>
         <small>Todo encapsulado para máxima seguridad, escalabilidad y rendimiento.</small>
-      </p>
+      </div>
+      <div class="svg-arch-wrap">
+        <!-- SVG DIAGRAMA BONITO -->
+        <svg width="860" height="250" viewBox="0 0 880 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="880" height="250" rx="38" fill="url(#bg-gradient)" />
+          <defs>
+            <linearGradient id="bg-gradient" x1="0" y1="0" x2="880" y2="250" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0d193d"/>
+              <stop offset="1" stop-color="#222950"/>
+            </linearGradient>
+          </defs>
+          <rect x="40" y="105" width="110" height="52" rx="20" fill="#2596f3" stroke="#1428a0" stroke-width="3"/>
+          <text x="95" y="137" font-size="18" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Proxy Inverso</text>
+          <polygon points="150,131 200,131 200,121 225,141 200,161 200,151 150,151" fill="#fff" opacity="0.88"/>
+          <rect x="230" y="90" width="135" height="48" rx="20" fill="#5328a0" stroke="#2596f3" stroke-width="3"/>
+          <text x="297" y="120" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Frontend</text>
+          <text x="297" y="140" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">Angular</text>
+          <polygon points="365,115 410,115 410,105 435,125 410,145 410,135 365,135" fill="#fff" opacity="0.88"/>
+          <rect x="440" y="75" width="135" height="48" rx="20" fill="#2596f3" stroke="#5328a0" stroke-width="3"/>
+          <text x="507" y="105" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Backend</text>
+          <text x="507" y="125" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">Spring Boot</text>
+          <polygon points="575,98 620,98 620,88 645,108 620,128 620,118 575,118" fill="#fff" opacity="0.88"/>
+          <rect x="655" y="45" width="130" height="44" rx="20" fill="#11c3b0" stroke="#1428a0" stroke-width="3"/>
+          <text x="720" y="75" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">FastAPI</text>
+          <text x="720" y="95" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">Python + IA</text>
+          <!-- Cassandra vertical below -->
+          <rect x="440" y="160" width="135" height="48" rx="20" fill="#23265c" stroke="#2596f3" stroke-width="3"/>
+          <text x="507" y="191" font-size="17" text-anchor="middle" fill="#fff" font-weight="bold" font-family="Inter,Arial">Cassandra</text>
+          <text x="507" y="209" font-size="13" text-anchor="middle" fill="#b0c4de" font-family="Inter,Arial">NoSQL DB</text>
+          <!-- Línea bajando a Cassandra -->
+          <rect x="505" y="125" width="5" height="35" rx="2" fill="#2596f3"/>
+        </svg>
+      </div>
     </div>
 
-    <h2 id="modelos">Modelos de Inteligencia Artificial</h2>
-    <div class="models">
-      <div class="model-card">
-        <div class="model-title">1. Detección de URLs Maliciosas</div>
-        <div class="model-desc">Analiza enlaces sospechosos usando IA para prevenir fraudes y phishing. Clasifica URLs en tiempo real con alta precisión.</div>
-      </div>
-      <div class="model-card">
-        <div class="model-title">2. Análisis de Correo SPAM</div>
-        <div class="model-desc">Modelo híbrido: reglas + XGBoost. Vectoriza textos, detecta patrones y filtra mensajes peligrosos usando aprendizaje automático.</div>
-      </div>
-      <div class="model-card">
-        <div class="model-title">3. Chatbot Inteligente</div>
-        <div class="model-desc">Responde dudas, asesora y educa en ciberseguridad usando procesamiento de lenguaje natural.</div>
-      </div>
-      <div class="model-card">
-        <div class="model-title">4. Detector de Imágenes Fake</div>
-        <div class="model-desc">CNN profunda entrenada con miles de imágenes reales y manipuladas. Clasifica imágenes como reales o falsas con una probabilidad.</div>
-      </div>
-      <div class="model-card">
-        <div class="model-title">5. Modelo de Voz: Idioma & Fake</div>
-        <div class="model-desc">Red neuronal multitarea que analiza audios para identificar el idioma (español, inglés, IA) y si la voz es real o deepfake.</div>
+    <div class="glass-card" id="modelos">
+      <h2>Modelos de Inteligencia Artificial</h2>
+      <div class="models">
+        <div class="model-card">
+          <div class="model-title">1. Detección de URLs Maliciosas</div>
+          <div class="model-desc">Analiza enlaces sospechosos usando IA para prevenir fraudes y phishing. Clasifica URLs en tiempo real con alta precisión.</div>
+        </div>
+        <div class="model-card">
+          <div class="model-title">2. Análisis de Correo SPAM</div>
+          <div class="model-desc">Modelo híbrido: reglas + XGBoost. Vectoriza textos, detecta patrones y filtra mensajes peligrosos usando aprendizaje automático.</div>
+        </div>
+        <div class="model-card">
+          <div class="model-title">3. Chatbot Inteligente</div>
+          <div class="model-desc">Responde dudas, asesora y educa en ciberseguridad usando procesamiento de lenguaje natural.</div>
+        </div>
+        <div class="model-card">
+          <div class="model-title">4. Detector de Imágenes Fake</div>
+          <div class="model-desc">CNN profunda entrenada con miles de imágenes reales y manipuladas. Clasifica imágenes como reales o falsas con una probabilidad.</div>
+        </div>
+        <div class="model-card">
+          <div class="model-title">5. Modelo de Voz: Idioma & Fake</div>
+          <div class="model-desc">Red neuronal multitarea que analiza audios para identificar el idioma (español, inglés, IA) y si la voz es real o deepfake.</div>
+        </div>
       </div>
     </div>
 
+    <div class="logos-tech">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" title="TensorFlow">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg" alt="Keras" title="Keras">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" alt="Cassandra" title="Cassandra">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" title="FastAPI">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular" title="Angular">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" title="Spring Boot">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-learn" title="Scikit-learn">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" title="Proxy inverso">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" title="Docker">
+    </div>
 
-    <div class="team card" id="equipo">
+    <div class="team" id="equipo">
       <h2>Equipo</h2>
       <ul>
         <li><a href="https://www.linkedin.com/in/sergio-sabater-ruiz-562753268/" target="_blank" style="color:var(--samsung-blue-light);text-decoration:none;">Sergio Sabater Ruiz</a></li>
@@ -236,36 +330,11 @@
         <!-- Puedes añadir aquí miembros concretos -->
       </ul>
     </div>
-    <div class="contact card" id="contacto">
+    <div class="contact" id="contacto">
       <h2>Contacto</h2>
       <p>Email: <a href="mailto:samsunginnovationcampusupv@gmail.com" style="color:var(--samsung-blue-light)">samsunginnovationcampusupv@gmail.com</a></p>
     </div>
   </main>
-  <div style="width:100%;margin:2.5rem 0 0.7rem 0;display:flex;flex-wrap:wrap;gap:20px;justify-content:center;align-items:center;">
-  <!-- TensorFlow -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" alt="TensorFlow" title="TensorFlow" style="height:40px;width:auto;filter:drop-shadow(0 0 2px #2596f3);background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Keras -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/keras/keras-original.svg" alt="Keras" title="Keras" style="height:40px;width:auto;filter:drop-shadow(0 0 2px #5328a0);background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Cassandra -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cassandra/cassandra-original.svg" alt="Cassandra" title="Cassandra" style="height:40px;width:auto;filter:drop-shadow(0 0 2px #2596f3);background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Python -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-  <!-- FastAPI -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" alt="FastAPI" title="FastAPI" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Angular -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" alt="Angular" title="Angular" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Spring Boot -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="Spring Boot" title="Spring Boot" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-  <!-- XGBoost (sin logo oficial, usa un icono de ML) -->
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-Learn" title="Scikit-Learn" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Scikit-learn -->
-  <img src="https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-11/xgboost-logo-rwd.png" alt="XGBoost" title="XGBoost" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Nginx (proxy inverso) -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" alt="Nginx" title="Proxy inverso" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-  <!-- Docker -->
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" title="Docker" style="height:40px;width:auto;background:#fff3;padding:4px;border-radius:8px;">
-</div>
-
   <footer>
     &copy; 2025 Sentinel AX &middot; Samsung Innovation Campus
   </footer>
